@@ -39,8 +39,8 @@ namespace FrameColorChange.ViewModels
                     category.IsSelected = false;
                 }
 
-                var supplierCategories = CategoriesList;
-                foreach (var listCategory in supplierCategories.Where(x => x.CategoryName.Equals(selectedCategory.CategoryName)))
+                var mycategories = CategoriesList;
+                foreach (var listCategory in mycategories.Where(x => x.CategoryName.Equals(selectedCategory.CategoryName)))
                 {
                     listCategory.IsSelected = selectedCategory.IsSelected == false;
                 }
