@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:converters="clr-namespace:FrameColorChange.Converters"
+             x:Name="FrameBackgroundColorChangeSamplePage"
+             x:Class="FrameColorChange.Views.FrameSamplePage">
+
+    <ContentPage.Resources>
+        <converters:SelectedCategoryConverter x:Key="SelectedCategoryConverter" />
+    </ContentPage.Resources>
+    
+    <StackLayout Spacing="20" Margin="0,20,0,20">
+        <CollectionView ItemsSource="{Binding CategoriesList}" >
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical"
+                           ItemSpacing="20" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate >
+                    <DataTemplate>
+                        <Frame CornerRadius="20" 
+                               BackgroundColor="{Binding IsSelected, Converter={StaticResource SelectedCategoryConverter}}"
+                               Margin="20,0,20,0"  
+                               BorderColor="Black" >
+                        <Label Text="{Binding CategoryName}" HorizontalOptions="CenterAndExpand"/>
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BindingContext.CategorySelectedCommand, Source={x:Reference FrameBackgroundColorChangeSamplePage}}" 
+                                                  CommandParameter="{Binding .}"
+                                                  NumberOfTapsRequired="1"/>
+                        </Frame.GestureRecognizers>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                
+            </CollectionView>
+        </StackLayout>
+</ContentPage>
